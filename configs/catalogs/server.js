@@ -6,9 +6,9 @@ const path = require('path');
 const axios = require("axios");
 const app = express();
 const PingMonitor = require('ping-monitor');
-const port = process.env.PORT || 5110;
+const port = process.env.PORT || 3000;
 const pingOptions = {
-  website: `https://lxr7f3-${port}csb.app/`,
+  website: `https://replit.com/@ainzdeveloper/a#README.md`,
   title: 'Ainz', 
   interval: 1 // minutes
 };
@@ -33,6 +33,15 @@ monitor.start();
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'html/website.html')));
 
+app.get('/',(req, res) => res.sendStatus(200));
+
+setInterval(uptime, 525600);
+
+function uptime() {
+ axios.get(pingOptions.website).then(() => {}).catch(() =>
+  {});
+}
+  
 const http = require('http');
 const { Server } = require("socket.io");
 const httpServer = http.createServer(app);
